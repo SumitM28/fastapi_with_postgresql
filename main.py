@@ -1,11 +1,13 @@
 from fastapi import FastAPI
-import model
+from models import userModel, awsModel
 from database import engine
-from routes.user import router as userRoutes
+from routes import user, awsRoute
+
 import uvicorn
 
 app = FastAPI()
-model.Base.metadata.create_all(bind=engine)
+userModel.Base.metadata.create_all(bind=engine)
+awsModel.Base.metadata.create_all(bind=engine)
 
 @app.get('/')
 def index():
@@ -22,8 +24,8 @@ def get_health():
         'message':'Your application health is good'
     }
 
-app.include_router(userRoutes,prefix='/user')
-
+app.include_router(user.router,prefix='/user')
+app.include_router(awsRoute.router, prefix='/aws')
 
 if __name__ == '__main__':
     uvicorn.run(app,port=8080)
