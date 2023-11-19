@@ -1,0 +1,10 @@
+steps:
+1. clone the project
+2. create a virtual environment using this cmd:
+    `python -m venv env`
+3. run the virtual environment using this cmd:
+    `env/Scripts/activate`
+4. install all the dependencies and libraries using this cmd:
+    `pip install -r requirements.txt`
+5. run project using this cmd:
+    `uvicorn main:app --reload`
